@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class Driver {
     public static void main(String[] args) {
         String[] crns = {"asdf", "asdfdas", "asdf", "asdf", "asfd", "asdf", "sdaf"};
-//        String semester = "Spring 2019";
-        String semester = "Fall 2018";
+        String semester = "Spring 2019";
+//        String semester = "Fall 2018";
         System.setProperty("webdriver.gecko.driver", System.getProperty("path"));
         System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");
@@ -21,7 +21,7 @@ public class Driver {
         b.findElement(By.name("username")).sendKeys(System.getProperty("username"));
         b.findElement(By.name("password")).sendKeys(System.getProperty("password"));
         b.findElement(By.xpath("//input[@value='LOGIN']")).click();
-//        wait(10); //for duo
+//        wait(20000); //for duo
 //        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Register for Classes")));
 //        b.get(b.findElement(By.linkText("Register for Classes")).getAttribute("href"));
 
