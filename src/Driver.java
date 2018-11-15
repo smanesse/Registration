@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
     public static void main(String[] args) {
-        String[] crns = {"asdf", "asdfdas", "asdf", "asdf", "asfd", "asdf", "sdaf"};
+        String[] crns = {"14528", "14097", "11121", "11127", "12967", "14368"};
         String semester = "Spring 2019";
 //        String semester = "Fall 2018";
         System.setProperty("webdriver.gecko.driver", System.getProperty("path"));
@@ -21,21 +21,13 @@ public class Driver {
         b.findElement(By.name("username")).sendKeys(System.getProperty("username"));
         b.findElement(By.name("password")).sendKeys(System.getProperty("password"));
         b.findElement(By.xpath("//input[@value='LOGIN']")).click();
-//        wait(20000); //for duo
-//        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Register for Classes")));
-//        b.get(b.findElement(By.linkText("Register for Classes")).getAttribute("href"));
+        wait(20000); //for duo
 
         b.get("https://ss.banner.usu.edu/StudentRegistrationSsb/ssb/registration/registerPostSignIn?mode=registration");
-//        String xpath = "//body//*[text()[contains(.,'" + semester + "')]]";
-//        WebDriverWait wait = new WebDriverWait(b, 3);
-//        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
-//        b.findElement(By.xpath(xpath)).click();
-//        b.findElement(By.id("term-go"));
         b.findElement(By.id("s2id_txt_term")).click();
         String xpath = "//body//*[text()[contains(.,'" + semester + "')]]";
         b.findElement(By.xpath(xpath)).click();
 
-//        b.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         refresh(b);
 
         b.findElement(By.id("enterCRNs-tab")).click();
@@ -47,7 +39,8 @@ public class Driver {
             }
             b.findElement(By.id("addAnotherCRN")).click();
         }
-//        b.findElement(By.id("addCRNbutton")).click();
+        b.findElement(By.id("addCRNbutton")).click();
+        b.findElement(By.id("saveButton")).click();
 
     }
 
@@ -56,12 +49,13 @@ public class Driver {
             b.findElement(By.id("enterCRNs-tab")).click();
         } catch (WebDriverException f) {
             try {
+                wait(250);
                 b.findElement(By.xpath("//button[text()='Ok']")).click();
+                wait(250);
             } catch (org.openqa.selenium.NoSuchElementException e) {
                 //catch for first case
             }
             b.findElement(By.id("term-go")).click();
-            wait(500);
             refresh(b);
         }
     }
